@@ -21,8 +21,8 @@ run_test() {
     fi
 }
 
-run_test "John" "Enter your name: Hello World, John!"
-run_test "Alice" "Enter your name: Hello World, Alice!"
-run_test "" "Enter your name: Hello World, !"
+run_test "John" "Enter your name: Hello world, John!"
+run_test "Alice" "Enter your name: Hello world, Alice!"
+run_test "" "Enter your name: Hello world, !"
 
 echo "All CI tests passed ✅"

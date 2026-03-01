@@ -1,0 +1,26 @@
+name: C++ Build CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Install g++
+      run: sudo apt-get update && sudo apt-get install -y g++
+
+    - name: Build Program
+      run: g++ Hello_world.cpp -o hello
+
+    - name: Run Tests
+      run: |
+        chmod +x Hello_world_test.sh
+        ./Hello_world_test.sh

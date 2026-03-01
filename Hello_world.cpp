@@ -7,7 +7,7 @@ int main() {
     cout << "Enter your name: ";
     getline(cin, name);
 
-    cout << "Hello World, " << name << "!" << endl;
+    cout << "Hello world, " << name << "!" << endl;
 
     return 0;
 }
