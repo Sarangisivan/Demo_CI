@@ -1,23 +1,16 @@
-# Use Ubuntu as base
-FROM ubuntu:22.04
+# Stage 1: Build
+FROM ubuntu:22.04 AS build
 
-# Install required dependencies
-RUN apt-get update && apt-get install -y g++ && rm -rf /var/lib/apt/lists/*
-
-# Copy source code
-COPY Hello_world.cpp /app/Hello_world.cpp
-COPY Hello_world_test.sh /app/Hello_world_test.sh
+RUN apt-get update && apt-get install -y g++
 
 WORKDIR /app
+COPY Hello_world.cpp Hello_world_test.sh ./
 
-# Build program
 RUN g++ Hello_world.cpp -o hello
+RUN chmod +x Hello_world_test.sh && ./Hello_world_test.sh
 
-# Make test script executable
-RUN chmod +x Hello_world_test.sh
-
-# Run tests
-RUN ./Hello_world_test.sh
-
-# Set default command
+# Stage 2: Final image
+FROM ubuntu:22.04
+WORKDIR /app
+COPY --from=build /app/hello .
 CMD ["./hello"]
